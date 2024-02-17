@@ -51,6 +51,7 @@ class G4T1 : public CentralHub {
         double ecg_risk;
         double trm_risk;
         double glc_risk;
+        double rsp_risk;
 
         double abps_batt;
         double abpd_batt;
@@ -58,6 +59,7 @@ class G4T1 : public CentralHub {
         double ecg_batt;
         double trm_batt;
         double glc_batt;
+        double rsp_batt;
 
         double abps_raw;
         double abpd_raw;
@@ -65,6 +67,7 @@ class G4T1 : public CentralHub {
         double ecg_raw;
         double trm_raw;
         double glc_raw;
+        double rsp_raw;
 
         ros::Publisher pub;
         bool lost_packt;
