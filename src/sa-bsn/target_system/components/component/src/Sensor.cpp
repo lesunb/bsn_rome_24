@@ -251,6 +251,10 @@ void Sensor::convert_name() {
         name_node_sensor = "glucose";
         name_node_sensor_simulation = "glucose";
     }
+    else if(node_name == "/g3t1_7"){
+        name_node_sensor = "respiration";
+        name_node_sensor_simulation = "respiration";
+    }
     else{
         name_node_sensor = node_name;
         name_node_sensor_simulation = node_name;

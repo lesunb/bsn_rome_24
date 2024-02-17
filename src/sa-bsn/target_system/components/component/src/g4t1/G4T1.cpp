@@ -18,8 +18,9 @@ std::vector<std::string> G4T1::getPatientStatus() {
     std::string ecg;
     std::string trm;
     std::string glc;
+    std::string rsp;
 
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 7; i++) {
         double sensor_risk = data_buffer[i].back();
 
 
@@ -51,10 +52,13 @@ std::vector<std::string> G4T1::getPatientStatus() {
         } else if (i == 5) {
             glc = sensor_risk_str;
             glc_risk = sensor_risk;
+        } else if (i == 6) {
+            rsp = sensor_risk_str;
+            rsp_risk = sensor_risk;
         }
     }
 
-    std::vector<std::string> v = {trm, ecg, oxi, abps, abpd, glc};  
+    std::vector<std::string> v = {trm, ecg, oxi, abps, abpd, glc, rsp};  
     return v;
 }
 
@@ -102,6 +106,9 @@ void G4T1::collect(const messages::SensorData::ConstPtr& msg) {
         abpd_batt = batt;
         abpd_raw = msg->data;
     } else if (msg->type == "glucosemeter") {
+        glc_batt = batt;
+        glc_raw = msg->data;
+    } else if (msg->type == "respiration") {
         glc_batt = batt;
         glc_raw = msg->data;
     }
@@ -158,6 +165,7 @@ void G4T1::process(){
     ROS_INFO("| ABPS_RISK: %s", std::to_string(abps_risk).c_str());
     ROS_INFO("| ABPD_RISK: %s", std::to_string(abpd_risk).c_str());
     ROS_INFO("| GLC_RISK: %s", std::to_string(glc_risk).c_str());
+    ROS_INFO("| RSP_RISK: %s", std::to_string(rsp_risk).c_str());
     ROS_INFO("| PATIENT_STATE: %s", patient_risk.c_str());
     ROS_INFO("*****************************************");
 }
@@ -175,6 +183,8 @@ int32_t G4T1::getSensorId(std::string type) {
         return 4;
     else if (type == "glucosemeter")        
         return 5;
+    else if (type == "respiration")        
+        return 6;
     else {
         ROS_WARN("UNKNOWN TYPE: %s", type.c_str());
         return -1;
@@ -190,6 +200,7 @@ void G4T1::transfer() {
     msg.abps_batt = abps_batt;
     msg.abpd_batt = abpd_batt;
     msg.glc_batt = glc_batt;
+    msg.rsp_batt = rsp_batt;
 
     msg.trm_risk = trm_risk;
     msg.ecg_risk = ecg_risk;
@@ -197,6 +208,7 @@ void G4T1::transfer() {
     msg.abps_risk = abps_risk;
     msg.abpd_risk = abpd_risk;
     msg.glc_risk = glc_risk;
+    msg.rsp_risk = rsp_risk;
     
     msg.trm_data = trm_raw;
     msg.ecg_data = ecg_raw;
@@ -204,6 +216,7 @@ void G4T1::transfer() {
     msg.abps_data = abps_raw;
     msg.abpd_data = abpd_raw;
     msg.glc_data = glc_raw;
+    msg.rsp_data = glc_raw;
 
     msg.patient_status = patient_status;
 

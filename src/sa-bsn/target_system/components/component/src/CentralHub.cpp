@@ -16,6 +16,7 @@ int32_t CentralHub::run() {
     ros::Subscriber abpsSub = nh.subscribe("abps_data", 10, &CentralHub::collect, this);
     ros::Subscriber abpdSub = nh.subscribe("abpd_data", 10, &CentralHub::collect, this);
     ros::Subscriber glucosemeterSub = nh.subscribe("glucosemeter_data", 10, &CentralHub::collect, this);
+    ros::Subscriber respirationSub = nh.subscribe("respiration_data", 10, &CentralHub::collect, this);
     ros::Subscriber reconfigSub = nh.subscribe("reconfigure_"+ros::this_node::getName(), 10, &CentralHub::reconfigure, this);
 
     while(ros::ok()) {

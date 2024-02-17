@@ -18,6 +18,8 @@ namespace bsn {
                 return 4;
             else if (type == "glucosemeter")        
                 return 5;
+            else if (type == "respiration")        
+                return 6;
             else {
                 return -1;
             }

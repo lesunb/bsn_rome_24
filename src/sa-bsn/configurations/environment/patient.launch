@@ -4,7 +4,7 @@
 
     <param name="frequency" value="10" />
 
-    <param name="vitalSigns" value="oxigenation, heart_rate, temperature, abps, abpd, glucose" />
+    <param name="vitalSigns" value="oxigenation, heart_rate, temperature, abps, abpd, glucose, respiration" />
 
     <!-- Frequency for changes in states of each markov in Hertz -->
     <param name="oxigenation_Change" value="0.2"/>
@@ -13,6 +13,7 @@
     <param name="abps_Change" value="0.1"/>
     <param name="abpd_Change" value="0.1"/>
     <param name="glucose_Change" value="0.1"/>
+    <param name="respiration_Change" value="0.1"/>
 
     <!-- Offsets for each changes, in seconds -->
     <param name="oxigenation_Offset" value="10"/>
@@ -21,6 +22,7 @@
     <param name="abps_Offset" value="10"/>
     <param name="abpd_Offset" value="10"/>
     <param name="glucose_Offset" value="10"/>
+    <param name="respiration_Offset" value="10"/>
 
     <!-- Markov chain for oxigenation -->
     <param name="oxigenation_State0" value="0,0,0,0,0" />
@@ -106,4 +108,17 @@
     <param name="glucose_MidRisk1" value="96,119.99" />
     <param name="glucose_HighRisk1" value="120,200" />
 
+    <!-- Markov chain for respiration -->
+    <param name="respiration_State0" value="20,40,22,15,3" />
+    <param name="respiration_State1" value="10,50,20,15,5" />
+    <param name="respiration_State2" value="4,9,65,12,10" />
+    <param name="respiration_State3" value="0,2,33,50,15" />
+    <param name="respiration_State4" value="0,0,20,45,35" />
+
+    <!-- Risk values for respiration -->
+    <param name="respiration_HighRisk0" value="-5,11.99" />
+    <param name="respiration_MidRisk0" value="0,0" />
+    <param name="respiration_LowRisk" value="12,19.99" />
+    <param name="respiration_MidRisk1" value="0,0" />
+    <param name="respiration_HighRisk1" value="20,100" />
 </launch>
